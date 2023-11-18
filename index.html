@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let device = await navigator.bluetooth.requestDevice({
+    acceptAllDevices: true, 
+    optionalServices: [0xff0f]
+});
+
+let server = await device.gatt.connect();
+let service = await server.getPrimaryService(0xff0f);
+let characteristic = await service.getCharacteristic(0xfffc);
+characteristic.writeValue("hi");
+    </script>
+</body>
+</html>
